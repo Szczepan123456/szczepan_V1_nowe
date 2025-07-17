@@ -1,3 +1,1 @@
-QDRANT_URL=https://10c3a3db-bed3-47a4-bacb-da9aabb2190c.europe-west3-0.gcp.cloud.qdrant.io:6333
-QDRANT_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.l2FpbPw3sfJecBQpaUHpMUxt51PYk_48JU-fUXwUaOI
-QDRANT_COLLECTION=szczepan_v1
+.env
