@@ -11,6 +11,8 @@ import plotly.express as px
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams, PointStruct
 
+import openai  # trzeba mieć zainstalowane openai pip install openai
+
 # ---- Load env variables ----
 load_dotenv()
 QDRANT_URL = os.getenv("QDRANT_URL")
@@ -39,13 +41,21 @@ def get_all_data():
     df = pd.read_csv(DATA, sep=';')
     return df
 
-model = get_model()
-cluster_names = get_cluster_descriptions()
-all_df_raw = get_all_data()
-all_df = predict_model(model, data=all_df_raw)
-
-# ---- UI sidebar for user input ----
+# --- UI sidebar for user input ---
 with st.sidebar:
+    st.header("🔑 Wprowadź swój klucz OpenAI")
+    openai_key = st.text_input(
+        "Klucz OpenAI",
+        type="password",
+        help="Wpisz swój indywidualny klucz API OpenAI"
+    )
+    if not openai_key:
+        st.warning("Aby korzystać z aplikacji, wpisz proszę swój klucz OpenAI.")
+        st.stop()  # zatrzymuje wykonanie dalszej części, dopóki nie wpisze klucza
+    
+    # Ustaw klucz OpenAI globalnie
+    openai.api_key = openai_key
+
     st.header("👤 Powiedz nam coś o sobie")
     st.markdown("Pomożemy Ci znaleźć osoby o podobnych zainteresowaniach!")
 
@@ -62,6 +72,11 @@ with st.sidebar:
         'fav_place': fav_place,
         'gender': gender
     }])
+
+model = get_model()
+cluster_names = get_cluster_descriptions()
+all_df_raw = get_all_data()
+all_df = predict_model(model, data=all_df_raw)
 
 # ---- Predict cluster for current user ----
 predicted_cluster = predict_model(model, data=person_df)["Cluster"].values[0]
