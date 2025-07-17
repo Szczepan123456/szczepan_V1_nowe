@@ -3,6 +3,8 @@ pandas
 numpy
 python-dotenv
 openai
-pycaret
+pycaret==3.3.2
 plotly
 qdrant-client
+
+
