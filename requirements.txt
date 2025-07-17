@@ -1,10 +1,12 @@
 streamlit
-pandas
+pandas==1.5.3
 numpy
 python-dotenv
 openai
 pycaret==3.3.2
 plotly
 qdrant-client
+
+
 
 
