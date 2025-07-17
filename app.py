@@ -1,3 +1,15 @@
+import streamlit as st
+import pycaret
+import pandas as pd
+
+st.write("PyCaret version:", pycaret.__version__)
+st.write("Pandas version:", pd.__version__)
+
+# dalej idzie Twój dotychczasowy kod
+
+
+
+
 import json
 import os
 import uuid
